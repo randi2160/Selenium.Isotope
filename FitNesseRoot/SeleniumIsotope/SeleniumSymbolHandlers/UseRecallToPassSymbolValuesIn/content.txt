@@ -1,0 +1,8 @@
+!|SetSystem|<<SUT           |UnderTest                                   |
+|open      |${HOMEURL}                                                   |
+|ignore    |To do full string compare you can use standard symbol loaders|
+|check     |get Location    |>>URL                                       |
+|check     |get Location    |<<URL                                       |
+|ignore    |or your can combine you values using !-${SYMBOL}-!           |
+|check     |echo            |Something                      |>>SEARCH    |
+|check     |open            |!-${URL}-!?q=!-${SEARCH}-!    |            |

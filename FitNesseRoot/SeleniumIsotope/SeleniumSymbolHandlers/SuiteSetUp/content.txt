@@ -1,0 +1,14 @@
+!* Save System Under Test 
+!|Import                |
+|Selenium.Isotope       |
+
+!|Cell Handler Loader               |
+|load|SymbolSaveHandler  |FitLibrary|
+|load|SymbolRecallHandler|FitLibrary|
+*!
+
+!|FitLibrarySeleniumSUT                                                                   |
+|check                |GetSystemUnderTest|>>CONTROLLER                                       |
+|New Default Selenium |${SELENIUMSERVER} ||${SELENIUMPORT}   ||${BROWSER}||${WEBSERVER}|
+|check                |GetSystemUnderTest|>>SUT                                              |
+|reject               |getTimeout        |NULL                                               |

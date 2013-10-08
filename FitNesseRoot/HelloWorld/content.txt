@@ -1,0 +1,10 @@
+!define COMMAND_PATTERN {%m %p}
+!define TEST_RUNNER [dotnet4\FitServer.exe]
+!path Fixtures\HelloWorld4\HelloWorld.Fitnesse.dll
+
+!|HelloWorld.OurFirstTest                     |
+|string1  |string2  |Concatenate?   |         |
+|Hello    |World    |Hello World    |Comment 1|
+|Word 1   |Word Two |Word 1 Word Two|Comment 2|
+|CamelCase|CaseCamel|>>CC           |         |
+|CamelCase|CaseCamel|<<CC           |         |

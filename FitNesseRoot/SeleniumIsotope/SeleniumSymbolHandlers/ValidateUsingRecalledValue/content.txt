@@ -1,0 +1,11 @@
+!|SetSystem|<<SUT             |UnderTest                                          |
+|open      |${HOMEURL}                                                            |
+|ignore    |To do full string compare you can use standard symbol loaders         |
+|check     |get Location      |>>URL                                              |
+|check     |get Location      |<<URL                                              |
+|ignore    |or your can combine your values using !-${SYMBOL}-!                   |
+|check     |echo              |Something                       |>>SEARCH          |
+|check     |open              |!-${URL}-!?q=!-${SEARCH}-!      |                  |
+|check     |get Value         |//input[@name='q']              |!-${SEARCH}-!     |
+|ignore    |This cell handler compares all type as Strings and is Case Insensitive|
+|check     |get Location      |!-${URL}-!?Q=!-${SEARCH}-!                         |

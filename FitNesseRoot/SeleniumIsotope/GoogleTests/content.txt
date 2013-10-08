@@ -1,0 +1,4 @@
+!define WEBSERVER [http://www.google.com]
+!define HOMEURL (/)
+
+!contents -R -h -g

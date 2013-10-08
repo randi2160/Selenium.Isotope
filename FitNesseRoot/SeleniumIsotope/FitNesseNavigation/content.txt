@@ -1,0 +1,3 @@
+!define WEBSERVER [http://localhost:${FITNESSE_PORT}]
+!define HOMEURL (/)
+!contents -R2 -g -p -f -h

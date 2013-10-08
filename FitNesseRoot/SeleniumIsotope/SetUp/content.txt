@@ -1,0 +1,17 @@
+!*> Restore System Under Tests
+!|Selenium.Isotope.FitLibrarySeleniumSUT|
+
+!|Cell Handler Loader               |
+|load|SymbolSaveHandler  |FitLibrary|
+|load|SymbolRecallHandler|FitLibrary|
+
+!|SetSystem|<<SUT|UnderTest|
+*!
+
+!|Import                |
+|Selenium               |
+|Selenium.Isotope|
+
+!|SetSpeed |${PLAYBACKSPEED}|
+|setTimeout|60000           |
+|Window Maximize            |

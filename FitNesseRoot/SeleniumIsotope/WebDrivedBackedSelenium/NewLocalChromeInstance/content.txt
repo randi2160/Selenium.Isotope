@@ -1,0 +1,12 @@
+!|Import                |
+|Selenium.Isotope       |
+|OpenQA.Selenium        |
+|OpenQA.Selenium.Chrome |
+
+!|FitLibrarySeleniumSUT                                                          |
+|check|New WebDriver Backed Selenium|ChromeDriver      ||http://www.google.com|>>SUT|
+|open |http://google.com                                                            |
+|show |get Location                                                                 |
+|check|wait for element present     |//input[@name='q']||1000                 |true |
+
+#|check|New Remote WebDriver    |http://127.0.0.1:4444/wd/hub||FireFox  |

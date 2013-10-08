@@ -1,0 +1,15 @@
+#!|Fit Library Selenium Driver                                                                    |
+#|Start Browser On Host|${SELENIUMSERVER}|Port     |${SELENIUMPORT}|As|${BROWSER}|URL|${WEBSERVER}|
+#|pause            |10000                                                                              |
+!|open            |${HOMEURL}#q=selenium                                                                   |
+|check            |Wait For Page To Load|3000                                            |                 |
+|show             |get Location                                                                            |
+|check            |WaitForText          |Selenium                                        |Present|3000|true|
+|show             |IsTextPresent        |Exception                                                         |
+|check            |IsElementPresent     |//div[@class]/div[@class]                       |true             |
+|check            |IsElementPresent     |//div[@class='gbm']/div[@class]                 |true             |
+|check            |IsElementPresent     |//div[@class]/div[@class='gbmc']                |true             |
+|check            |IsElementPresent     |//div[@class='gbm']/div[@class='gbmc']          |true             |
+|check            |IsElementPresent     |//div[contains(@class,'gbm')]/div[@class='gbmc']|true             |
+
+#|use xPath Library|javascript-xpath                                                                        |

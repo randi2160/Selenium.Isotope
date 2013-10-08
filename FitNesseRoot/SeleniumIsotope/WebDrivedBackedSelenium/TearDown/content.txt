@@ -1,0 +1,9 @@
+!|Cell Handler Loader               |
+|load|SymbolSaveHandler  |FitLibrary|
+|load|SymbolRecallHandler|FitLibrary|
+
+!|Selenium.Isotope.FitLibrarySeleniumSUT|
+|SetSystemUnderTest     |<<SUT                    |
+|reject                 |getTimeout     |NULL     |
+|Close                                            |
+|Stop                                             |

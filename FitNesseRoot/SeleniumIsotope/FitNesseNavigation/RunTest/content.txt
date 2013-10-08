@@ -1,0 +1,12 @@
+Test Runs Another test via URL with ?test at the end of it
+When Page retrieved summary should have a 'pass' class
+Retrieving inner HTML of the test-summary will show the summary of the test run 
+Retrieving inner HTML of main class will return tho whole test page (including summary)
+note: in order to prevent "FitNesse" from transforming inner HTML into an escaped text store retrieved result in the symbol
+
+!|open            |${WEBSERVER}/.HelloWorld?test                                                                                |
+|WaitForPageToLoad|5000                                                                                                                  |
+|check            |get Attribute   |//div[@id='test-summary']@class                                                             |pass    |
+|check            |get Eval        |selenium.browserbot.getUserWindow().document.getElementById('test-summary').innerHTML       |>>SUMARY|
+|check            |IsElementPresent|CSS=body.testPage                                                                           |true    |
+|check            |get Eval        |selenium.browserbot.getUserWindow().document.getElementsByClassName('testPage')[0].innerHTML|>>HTML  |

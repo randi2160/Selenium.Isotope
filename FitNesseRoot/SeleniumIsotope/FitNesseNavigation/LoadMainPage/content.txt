@@ -1,0 +1,6 @@
+#!|Fit Library Selenium Driver                 |
+!|open|${HOMEURL}                                               |
+|check|IsTextPresent           |Welcome to FitNesse!|true       |
+|check|Wait For Element Present|div#test_summary    ||1000|false|
+
+
