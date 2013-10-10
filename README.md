@@ -1,7 +1,7 @@
 ## Selenium.Isotope is a yet another Selenium fixture for FitNesse.
 
 Implemented only for FitNesse.Net (sorry SLIM users).
-Note: If you want to use SLIM with Selenium I would highly recomment to look at http://xebia.github.io/Xebium/
+Note: If you want to use SLIM with Selenium I would highly recommend to look at the XEBIUM project: http://xebia.github.io/Xebium/
 
 ## Currently supports 
 * DefaultSelenium (AKA Selenium.RC, AKA Selenium v1)
