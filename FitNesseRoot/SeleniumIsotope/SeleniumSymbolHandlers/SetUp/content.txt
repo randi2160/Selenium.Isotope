@@ -10,7 +10,7 @@
 
 !|Import                |
 |Selenium               |
-|StemSoft.SeleniumDriver|
+|Selenium.Isotope|
 
 !|cell handler loader                   |
 |load|Selenium Recall Handler           |
