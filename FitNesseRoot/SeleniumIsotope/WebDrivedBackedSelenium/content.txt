@@ -1,1 +1,4 @@
+All the tests below describe the tests which use !-WebDriverBackedSelenium-!
+Each test briefly outlines the configuration required in order to run it.
+
 !contents -R2 -g -p -f -h

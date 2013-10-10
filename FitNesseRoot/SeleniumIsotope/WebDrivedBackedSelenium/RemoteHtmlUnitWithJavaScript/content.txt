@@ -1,0 +1,16 @@
+To successfully run this test you will need following:
+Selenium grid
+!note java -jar selenium-server-standalone-2.35.0.jar -role hub
+Selenium node which has HTML unit support 
+!note java -Xmx128m -jar selenium-server-standalone-2.35.0.jar -role node -port 5556 -host %COMPUTERNAME% -hub !-http://localhost:4444/grid/register-! -browser "browserName=htmlunit,version=firefox,maxInstances=1"
+
+!|Import                |
+|Selenium.Isotope       |
+|OpenQA.Selenium        |
+|OpenQA.Selenium.Firefox|
+
+!|FitLibrarySeleniumSUT                                                              |
+|check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||HtmlUnitWithJavaScript|>>SUT|
+|open |http://google.com                                                                |
+|show |get Location                                                                     |
+|check|wait for element present            |//input[@name='q']          ||1000    |true |

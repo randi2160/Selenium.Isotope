@@ -1,8 +1,7 @@
 All the test below are using remote selenium server
 !note By Default Selenium Server assumed to be on the same server instance as !-FitNesse-! and running on the Port 4444
 
-#!define SELENIUMSERVER [SSQCW2k8SRV06]
-!define SELENIUMSERVER [ssqcwin7vm04]
+!define SELENIUMSERVER [localhost]
 !define SELENIUMPORT [4444]
 !define PLAYBACKSPEED [500]
 
@@ -12,14 +11,13 @@ All the test below are using remote selenium server
 Set Default browser:
 !define BROWSER [*firefox]
 #!define BROWSER [*iexplore]
-#-!define BROWSER [*iexploreproxy]
-#-!define BROWSER [*opera]
-#--!define BROWSER [*safari]
-#-!define BROWSER [*safariproxy]
+#!define BROWSER [*iexploreproxy]
+#!define BROWSER [*opera]
+#!define BROWSER [*safari]
+#!define BROWSER [*safariproxy]
 #!define BROWSER [*googlechrome]
 
 !path Fixtures\Selenium.2\net40\*.dll
-#!path C:\Projects\SeleniumDriver\bin\Debug\*.dll
 !path dotnet4\*.dll
 !define COMMAND_PATTERN {%m %p}
 !define TEST_RUNNER {dotnet4\FitServer.exe}

@@ -1,0 +1,93 @@
+To run this test you need following:
+Selenium Grid
+!note java -jar selenium-server-standalone-2.35.0.jar -role hub
+Selenium Node with support for required driver (default config)
+!note java -jar selenium-server-standalone-2.35.0.jar -role node -host %COMPUTERNAME% -hub !-http://localhost:4444/grid/register-! 
+or specific config:
+!note c:\tools\jre\bin\java -jar selenium-server-standalone-2.35.0.jar -role node -host %COMPUTERNAME% -hub !-http://localhost:4444/grid/register-! -nodeConfig win.json 
+
+!|Import                |
+|Selenium.Isotope       |
+|OpenQA.Selenium        |
+|OpenQA.Selenium.Firefox|
+
+!-FireFox-! below is not the browser name.
+This is a method name implemented by desiredcapabilities class (see selenium documentation for more details).
+Following method come out of the box:
+!-FireFox, InternetExplorer, PhantomJS, HtmlUnit, HtmlUnitWithJavaScript, IPhone, IPad, Chrome, Android, Opera, Safari-!
+  
+!|FitLibrarySeleniumSUT                                                                |
+|check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||FireFox|>>SUT|
+|open |http://google.com                                                               |
+|show |get Location                                                                    |
+|check|wait for element present            |//input[@name='q']          ||1000   |true |
+
+where win.json is something like this:
+!*> win.json
+{"capabilities":
+[
+{"name":"FireFox on Windows 7",
+"seleniumProtocol":"Selenium",
+"browserName":"*firefox",
+"maxInstances":1},
+{
+"seleniumProtocol":"Selenium",
+"browserName":"*googlechrome",
+"maxInstances":1},
+{
+"seleniumProtocol":"Selenium",
+"browserName":"*iexplore",
+"maxInstances":1},
+{
+"seleniumProtocol":"Selenium",
+"browserName":"*iexploreproxy",
+"maxInstances":1},
+{
+"name":"opera",
+"seleniumProtocol":"Selenium",
+"browserName":"*opera",
+"maxInstances":1},
+{
+"seleniumProtocol":"Selenium",
+"browserName":"*safari",
+"maxInstances":1},
+{
+"seleniumProtocol":"Selenium",
+"browserName":"*safariproxy",
+"maxInstances":1},
+{
+"seleniumProtocol":"WebDriver",
+"browserName":"firefox",
+"maxInstances":1},
+{
+"seleniumProtocol":"WebDriver",
+"browserName":"chrome",
+"maxInstances":1},
+{
+"seleniumProtocol":"WebDriver",
+"browserName":"internet explorer",
+"maxInstances":1},
+{
+"seleniumProtocol":"WebDriver",
+"browserName":"opera",
+"maxInstances":1},
+{
+"seleniumProtocol":"WebDriver",
+"browserName":"htmlunit",
+"maxInstances":1,
+"version"="firefox"},
+{
+"seleniumProtocol":"WebDriver",
+"browserName":"safari",
+"maxInstances":1}
+],
+"configuration":{
+"register":true,
+"proxy":"org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+"maxSession":5,
+"hubHost":"localhost",
+"role":"node",
+"registerCycle":5000,
+}
+}
+*!

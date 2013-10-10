@@ -1,3 +1,8 @@
+All the tests below share the same selenium instance 
+- Selenium starts once in >SuiteSetUp. 
+- Each of the test reuses the same session by passing around Selenium object via !-getSystemUnderTest and setSystemUnderTest-!
+- Selenium stops by SuiteTearDown
+
 !define WEBSERVER [http://www.google.com]
 !define HOMEURL (/)
 

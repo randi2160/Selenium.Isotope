@@ -1,0 +1,17 @@
+You should be able to launch this test without any additional components such selenium server, selenium GRID or NODE.
+You need to provide a driver class name to create an instance of the !-WebDriver-! (see !-FireFoxDriver-! below).
+You can use you own driver class if you wish. 
+Just make sure you import a namespace and satisfy driver specific configuration.
+
+!|Import                |
+|Selenium.Isotope       |
+|OpenQA.Selenium        |
+|OpenQA.Selenium.Firefox|
+
+!|FitLibrarySeleniumSUT                                                             |
+|check|New WebDriver Backed Selenium|FirefoxDriver     ||http://www.google.com|>>SUT|
+|open |http://google.com                                                            |
+|show |get Location                                                                 |
+|check|wait for element present     |//input[@name='q']||1000                 |true |
+
+#|check|New Remote WebDriver    |http://127.0.0.1:4444/wd/hub||FireFox  |

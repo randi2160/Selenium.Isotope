@@ -1,2 +1,6 @@
-Selenium is using !-${NAME}-!
+Selenium is using !-${NAME}-! as a browser
+
+To run this tests you need a standalone selenium server running (default configuration should suffice).
+!note c:\tools\jre\bin\java -jar selenium-server-standalone-2.35.0.jar
+
 !contents -R2 -g -p -f -h
