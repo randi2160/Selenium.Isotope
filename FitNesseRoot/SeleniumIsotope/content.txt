@@ -1,4 +1,4 @@
-All the test below are using remote selenium server
+All the tests below are using remote selenium server
 !note By Default Selenium Server assumed to be on the same server instance as !-FitNesse-! and running on the Port 4444
 
 !define SELENIUMSERVER [localhost]

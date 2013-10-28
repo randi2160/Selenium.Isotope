@@ -1,0 +1,21 @@
+To run this test you need following:
+Selenium Grid
+!note java -jar selenium-server-standalone-2.35.0.jar -role hub
+PhantomJS Node connected to the selenium hub
+!note phantomjs.exe !---webdriver=5555 --webdriver-selenium-grid-hub=http://localhost:4444/grid/register -!
+
+!|Import                  |
+|Selenium.Isotope         |
+|OpenQA.Selenium          |
+|OpenQA.Selenium.PhantomJS|
+
+!-PhantomJS-! below is not the browser name.
+This is a method name implemented by desiredcapabilities class (see selenium documentation for more details).
+Following method come out of the box:
+!-FireFox, InternetExplorer, PhantomJS, HtmlUnit, HtmlUnitWithJavaScript, IPhone, IPad, Chrome, Android, Opera, Safari-!
+  
+!|FitLibrarySeleniumSUT                                                                |
+|check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||PhantomJS|>>SUT|
+|open |http://google.com                                                               |
+|show |get Location                                                                    |
+|check|wait for element present            |//input[@name='q']          ||1000   |true |
