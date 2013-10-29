@@ -1,8 +1,8 @@
 !define word [jQuery]
 !|open|${HOMEURL}                                   |
 |check|wait For Page To Load|3000     |             |
-|check|WaitForTextPresent   |Google   |true         |
+|check|WaitForText          |Google   |true         |
 |check|type                 |name=q   ||${word}|    |
-|check|click                |name=btnK|             |
-|check|WaitForTextPresent   |${word}  ||1000   |true|
+|check|click                |name=btnG|             |
+|check|WaitForText          |${word}  ||1000   |true|
 
