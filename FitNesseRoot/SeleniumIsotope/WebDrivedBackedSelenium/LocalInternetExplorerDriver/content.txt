@@ -1,0 +1,15 @@
+To get this test working download google !-InternetExplorerDriver.exe-! and put in in the system path.
+No other configuration options are necessary.
+
+!|Import           |
+|Selenium.Isotope  |
+|OpenQA.Selenium   |
+|OpenQA.Selenium.IE|
+
+!|FitLibrarySeleniumSUT                                                                 |
+|check|New WebDriver Backed Selenium|InternetExplorerDriver||http://www.google.com|>>SUT|
+
+!define word [InternetExplorerDriver]
+
+!include -seamless <WebDrivedBackedSelenium.SharedPage
+
