@@ -1,0 +1,18 @@
+To successfully run this test you will need following:
+Selenium grid
+!note java -jar selenium-server-standalone-2.35.0.jar -role hub
+Download IEDriverServer.exe locally
+Selenium node which has IEDriver support 
+!note java -jar selenium-server-standalone-2.35.0.jar -role node -host %COMPUTERNAME% -hub http://localhost:4444/grid/register -Dwebdriver.ie.driver=c:\path\to\ie\driver\IEDriverServer.exe
+
+!|Import           |
+|Selenium.Isotope  |
+|OpenQA.Selenium   |
+|OpenQA.Selenium.IE|
+
+!|FitLibrarySeleniumSUT                                                                         |
+|check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||InternetExplorer|>>SUT|
+
+!define word [remote InternetExplorer driver]
+
+!include -seamless <WebDrivedBackedSelenium.SharedPage
