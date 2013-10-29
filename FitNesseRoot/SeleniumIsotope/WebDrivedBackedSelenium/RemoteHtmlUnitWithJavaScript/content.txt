@@ -11,6 +11,7 @@ Selenium node which has HTML unit support
 
 !|FitLibrarySeleniumSUT                                                              |
 |check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||HtmlUnitWithJavaScript|>>SUT|
-|open |http://google.com                                                                |
-|show |get Location                                                                     |
-|check|wait for element present            |//input[@name='q']          ||1000    |true |
+
+!define word [DesiredCapabilities HtmlUnitWithJavaScript]
+
+!include -seamless <WebDrivedBackedSelenium.SharedPage

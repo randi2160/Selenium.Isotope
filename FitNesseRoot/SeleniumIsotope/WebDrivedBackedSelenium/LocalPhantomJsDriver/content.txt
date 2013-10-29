@@ -8,6 +8,7 @@ PhantomJS.exe to be in the path.
 
 !|FitLibrarySeleniumSUT                                                             |
 |check|New WebDriver Backed Selenium|PhantomJSDriver   ||http://www.google.com|>>SUT|
-|open |http://google.com                                                            |
-|show |get Location                                                                 |
-|check|wait for element present     |//input[@name='q']||1000                 |true |
+
+!define word [PhantomJSDriver]
+
+!include -seamless <WebDrivedBackedSelenium.SharedPage

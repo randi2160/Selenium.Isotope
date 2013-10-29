@@ -1,0 +1,17 @@
+To successfully run this test you will need following:
+Selenium grid
+!note java -jar selenium-server-standalone-2.35.0.jar -role hub
+Selenium node which has HTML unit support 
+!note java -jar selenium-server-standalone-2.35.0.jar -role node -host %COMPUTERNAME% -hub http://localhost:4444/grid/register -Dwebdriver.chrome.driver=c:\path\to\chrome\driver\chromedriver.exe
+
+!|Import               |
+|Selenium.Isotope      |
+|OpenQA.Selenium       |
+|OpenQA.Selenium.Chrome|
+
+!|FitLibrarySeleniumSUT                                                               |
+|check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||Chrome|>>SUT|
+
+!define word [DesiredCapabilities Chrome]
+
+!include -seamless <WebDrivedBackedSelenium.SharedPage

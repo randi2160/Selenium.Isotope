@@ -14,8 +14,9 @@ This is a method name implemented by desiredcapabilities class (see selenium doc
 Following method come out of the box:
 !-FireFox, InternetExplorer, PhantomJS, HtmlUnit, HtmlUnitWithJavaScript, IPhone, IPad, Chrome, Android, Opera, Safari-!
   
-!|FitLibrarySeleniumSUT                                                                |
+!|FitLibrarySeleniumSUT                                                                  |
 |check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||PhantomJS|>>SUT|
-|open |http://google.com                                                               |
-|show |get Location                                                                    |
-|check|wait for element present            |//input[@name='q']          ||1000   |true |
+
+!define word [DesiredCapabilities PhantomJS]
+
+!include -seamless <WebDrivedBackedSelenium.SharedPage

@@ -18,9 +18,11 @@ Following method come out of the box:
   
 !|FitLibrarySeleniumSUT                                                                |
 |check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||FireFox|>>SUT|
-|open |http://google.com                                                               |
-|show |get Location                                                                    |
-|check|wait for element present            |//input[@name='q']          ||1000   |true |
+
+!define word [DesiredCapabilities FireFox]
+
+!include -seamless <WebDrivedBackedSelenium.SharedPage
+
 
 where win.json is something like this:
 !*> win.json
