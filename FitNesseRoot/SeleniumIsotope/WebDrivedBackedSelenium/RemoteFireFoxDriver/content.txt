@@ -1,10 +1,10 @@
 To run this test you need following:
 Selenium Grid
-!note java -jar selenium-server-standalone-2.35.0.jar -role hub
+!note java -jar selenium-server-standalone-2.37.0.jar -role hub
 Selenium Node with support for required driver (default config)
-!note java -jar selenium-server-standalone-2.35.0.jar -role node -host %COMPUTERNAME% -hub !-http://localhost:4444/grid/register-! 
+!note java -jar selenium-server-standalone-2.37.0.jar -role node -host %COMPUTERNAME% -hub !-http://-!${SELENIUMSERVER}:${SELENIUMPORT}/grid/register 
 or specific config:
-!note c:\tools\jre\bin\java -jar selenium-server-standalone-2.35.0.jar -role node -host %COMPUTERNAME% -hub !-http://localhost:4444/grid/register-! -nodeConfig win.json 
+!note c:\tools\jre\bin\java -jar selenium-server-standalone-2.37.0.jar -role node -host %COMPUTERNAME% -hub !-http-!://${SELENIUMSERVER}:${SELENIUMPORT}/grid/register -nodeConfig win.json 
 
 !|Import                |
 |Selenium.Isotope       |
@@ -17,7 +17,7 @@ Following method come out of the box:
 !-FireFox, InternetExplorer, PhantomJS, HtmlUnit, HtmlUnitWithJavaScript, IPhone, IPad, Chrome, Android, Opera, Safari-!
   
 !|FitLibrarySeleniumSUT                                                                |
-|check|New Remote WebDriver Backed Selenium|http://127.0.0.1:4444/wd/hub||FireFox|>>SUT|
+|check|New Remote WebDriver Backed Selenium|http://${SELENIUMSERVER}:${SELENIUMPORT}/wd/hub||FireFox|>>SUT|
 
 !define word [DesiredCapabilities FireFox]
 

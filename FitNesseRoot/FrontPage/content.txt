@@ -1,0 +1,8 @@
+!c !1 .SeleniumIsotope
+
+!define SELENIUMSERVER [localhost]
+!define SELENIUMPORT [4444]
+[[Selenium Grid][http://${SELENIUMSERVER}:${SELENIUMPORT}/]]
+
+
+!note Release ${FITNESSE_VERSION}

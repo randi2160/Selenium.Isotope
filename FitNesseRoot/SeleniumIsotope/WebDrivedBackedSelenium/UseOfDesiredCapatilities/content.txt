@@ -1,0 +1,72 @@
+To successfully run this test you will need following:
+Selenium grid
+!note java -jar selenium-server-standalone-2.37.0.jar -role hub
+Download IEDriverServer.exe locally
+Selenium node which has IEDriver support 
+!note java -jar selenium-server-standalone-2.37.0.jar -role node -host %COMPUTERNAME% -hub !-http://-!${SELENIUMSERVER}:${SELENIUMPORT}/grid/register -nodeConfig ie10.json
+where ei10.json is following:
+!*> IE10.json
+{{{
+{"capabilities":
+[
+{
+"seleniumProtocol":"WebDriver",
+"browserName":"internet explorer",
+"maxInstances":1,
+"version":"10",
+"platform":"VISTA"}
+],
+"configuration":{
+"register":true,
+"proxy":"org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+"maxSession":1,
+"hubHost":"localhost",
+"role":"node",
+"registerCycle":5000,
+}
+}
+}}}
+*!
+
+
+!|Import           |
+|Selenium.Isotope  |
+|OpenQA.Selenium   |
+|OpenQA.Selenium.IE|
+
+Example of using [[desired capabilities][https://code.google.com/p/selenium/wiki/DesiredCapabilities]] for remote web driver.
+Use of desired capabilities to specify detailed driver settings (browser version, scroll or native events behavior).
+Desired capabilities cannot take precedence over capabilities method for example:
+using capability browserName=firefox followed by !-DesiredCapabilities.InternetExplorer-!() will result in Internet Explorer used by browser.
+Capabilities have to be defined prior to new remote web driver method call.
+Omit browser method in order to use defined capabilities for new remote web driver.
+
+Get Capability for unspecified keys returns null 
+setCapabilitity(key,value) always creates string capabilities.
+use setIntCapability(key,value) to create capability of type int
+or setBoolCapability(key,value) to create capability of type bool
+- elementScrollBehavior is int capability (if defined as string then IEDriverServer will crash)
+- !-JavascriptEnabled-! is a boolean capability (TRUE==true)
+
+!|FitLibrarySeleniumSUT                                                                                        |
+|check|set capability                      |browserName                                    ||internet explorer||
+|check|set capability                      |version                                        ||10               ||
+|check|set capability                      |platform                                       ||VISTA            ||
+|check|set int capability                  |elementScrollBehavior                          ||1                ||
+|check|set bool capability                 |JavascriptEnabled                              ||TRUE             ||
+|check|New Remote WebDriver Backed Selenium|http://${SELENIUMSERVER}:${SELENIUMPORT}/wd/hub|>>SUT              |
+|check|get capability                      |browserName                                    |internet explorer  |
+|check|get capability                      |version                                        |10                 |
+|check|get capability                      |platform                                       |>>PLATFORM         |
+|check|get capability                      |elementScrollBehavior                          |1                  |
+|check|get capability                      |JavascriptEnabled                              |true               |
+|check|get capability                      |Undefined capability                           |                   |
+
+Capabilities are reset every time we start new table.
+ 
+!|FitLibrarySeleniumSUT           |
+|check|get capability|browserName||
+
+!define word [remote InternetExplorer driver]
+
+!include -seamless <WebDrivedBackedSelenium.SharedPage!contents -R2 -g -p -f -h
