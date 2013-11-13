@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Collections.Generic;
 using fit;
 using fitlibrary;
 using Selenium;
@@ -16,6 +17,8 @@ namespace Selenium.Isotope
     {
         #region Private Variables
         private static ISelenium _seleniumInstance;
+        private Dictionary<string, object> capabilities = new Dictionary<string, object>();
+        private DesiredCapabilities desiredCaps = new DesiredCapabilities();
         const string cMaxTimeOut = "30000"; // Default timeout for a single action is 30 seconds
         ISelenium SystemUnderTest { get { return _seleniumInstance; } }
         #endregion
@@ -51,6 +54,50 @@ namespace Selenium.Isotope
         }
         #endregion
         #region Public Methods
+        #region Capability Methods
+        /// <summary>
+        /// Some of the capabilities must be of explicit base type.
+        /// Create a capability based on int value type
+        /// </summary>
+        /// <param name="Key">Capability name</param>
+        /// <param name="value">Int value</param>
+        public void SetBoolCapability(String Key, bool value)
+        {
+            this.SetCapability(Key, (Object)value);
+        }
+        /// <summary>
+        /// Some of the capabilities must be of explicit base type.
+        /// Create a capability based on int value type
+        /// </summary>
+        /// <param name="Key">Capability name</param>
+        /// <param name="value">Int value</param>
+        public void SetIntCapability(String Key, int value)
+        {
+            this.SetCapability(Key, (Object) value);
+        }
+        /// <summary>
+        /// Set Capability which is used to create a new remote Driver.
+        /// Has to be defined prior to the NewRemoteWebDriverBackedSelenium method call
+        /// To reset desired capabilities - start new table
+        /// <summary>
+        /// <param name="key">a string for URI to the selenium hub. f.e. http://127.0.0.1:4444/wd/hub </param>
+        /// <param name="value">a string for new capability value</param>
+        public void SetCapability(String Key, Object value)
+        {
+            this.capabilities[Key] = value;
+            this.desiredCaps = new DesiredCapabilities(this.capabilities);
+        }
+        /// <summary>
+        /// Gets current capability value.
+        /// </summary>
+        /// <param name="Key">Key name of capability</param>
+        /// <returns></returns>
+        public Object GetCapability(String Key)
+        {
+            Object result = this.desiredCaps.GetCapability(Key);
+            return result;
+        }
+        #endregion
         #region New Selenium Instances
         /// <summary>
         /// Create an instance of DefaultSelenium class (AKA Selenium 1, AKA RC, AKA CORE) and use it as SystemUnderTests.
@@ -89,11 +136,27 @@ namespace Selenium.Isotope
         /// <param name="capabilitiesMethod">FireFox, InternetExplorer, PhantomJS, HtmlUnit, HtmlUnitWithJavaScript, IPhone, IPad, Chrome, Android, Opera, Safari</param>
         public ISelenium NewRemoteWebDriverBackedSelenium(String hubURI, String capabilitiesMethod)
         {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
+            DesiredCapabilities caps = new DesiredCapabilities(capabilities);
             Type type = typeof(DesiredCapabilities);
             MethodInfo standardCapabilities = type.GetMethod(capabilitiesMethod, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase);
-            capabilities = (DesiredCapabilities)standardCapabilities.Invoke(capabilities, null);
-            IWebDriver driver = new RemoteWebDriver(new Uri(hubURI), capabilities);
+            caps = (DesiredCapabilities)standardCapabilities.Invoke(caps, null);
+            SetCapability(CapabilityType.BrowserName, caps.GetCapability(CapabilityType.BrowserName));
+            SetCapability(CapabilityType.Version, caps.GetCapability(CapabilityType.Version));
+            SetCapability(CapabilityType.Platform, caps.GetCapability(CapabilityType.Platform));
+            ISelenium selenium = NewRemoteWebDriverBackedSelenium(hubURI);
+            return selenium;
+        }
+        /// <summary>
+        /// Creates new Remote Web Driver Backed Selenium instance using capabilitites define via set/get capabilities methods.
+        /// 
+        /// </summary>
+        /// <param name="hubURI">a URI to the selenium hub. f.e. http://127.0.0.1:4444/wd/hub </param>
+        /// <returns></returns>
+        public ISelenium NewRemoteWebDriverBackedSelenium(String hubURI)
+        {
+            DesiredCapabilities caps = new DesiredCapabilities(this.capabilities);
+            this.desiredCaps = caps;
+            IWebDriver driver = new RemoteWebDriver(new Uri(hubURI), caps);
             ISelenium selenium = new WebDriverBackedSelenium(driver, hubURI);
             UseNewSelenium(selenium);
             return selenium;
