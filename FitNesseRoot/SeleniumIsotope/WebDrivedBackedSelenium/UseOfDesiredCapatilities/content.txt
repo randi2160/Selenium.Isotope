@@ -42,18 +42,20 @@ Capabilities have to be defined prior to new remote web driver method call.
 Omit browser method in order to use defined capabilities for new remote web driver.
 
 Get Capability for unspecified keys returns null 
-setCapabilitity(key,value) always creates string capabilities.
-use setIntCapability(key,value) to create capability of type int
-or setBoolCapability(key,value) to create capability of type bool
+setCapabilitity(key,value) always assumes that capabilities is a String.
+
 - elementScrollBehavior is int capability (if defined as string then IEDriverServer will crash)
 - !-JavascriptEnabled-! is a boolean capability (TRUE==true)
+!|TypeHelper                  |
+|Check|IntValue  |1   |>>int_1|
+|Check|bool Value|TRUE|>>TRUE |
 
 !|FitLibrarySeleniumSUT                                                                                        |
 |check|set capability                      |browserName                                    ||internet explorer||
 |check|set capability                      |version                                        ||10               ||
 |check|set capability                      |platform                                       ||VISTA            ||
-|check|set int capability                  |elementScrollBehavior                          ||1                ||
-|check|set bool capability                 |JavascriptEnabled                              ||TRUE             ||
+|check|set capability                      |elementScrollBehavior                          ||<<int_1          ||
+|check|set capability                      |JavascriptEnabled                              ||<<TRUE           ||
 |check|New Remote WebDriver Backed Selenium|http://${SELENIUMSERVER}:${SELENIUMPORT}/wd/hub|>>SUT              |
 |check|get capability                      |browserName                                    |internet explorer  |
 |check|get capability                      |version                                        |10                 |

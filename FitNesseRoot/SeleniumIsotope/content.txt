@@ -1,3 +1,8 @@
+!path Fixtures\Selenium.2\net40\*.dll
+!path dotnet4\*.dll
+!define COMMAND_PATTERN {%m %p}
+!define TEST_RUNNER {dotnet4\FitServer.exe}
+
 All the tests below are using remote selenium server
 !note By Default Selenium Server assumed to be on the same server instance as !-FitNesse-! and running on the Port 4444
 
@@ -16,10 +21,5 @@ Set Default browser:
 #!define BROWSER [*safari]
 #!define BROWSER [*safariproxy]
 #!define BROWSER [*googlechrome]
-
-!path Fixtures\Selenium.2\net40\*.dll
-!path dotnet4\*.dll
-!define COMMAND_PATTERN {%m %p}
-!define TEST_RUNNER {dotnet4\FitServer.exe}
 
 !contents -R -h -g

@@ -56,26 +56,6 @@ namespace Selenium.Isotope
         #region Public Methods
         #region Capability Methods
         /// <summary>
-        /// Some of the capabilities must be of explicit base type.
-        /// Create a capability based on int value type
-        /// </summary>
-        /// <param name="Key">Capability name</param>
-        /// <param name="value">Int value</param>
-        public void SetBoolCapability(String Key, bool value)
-        {
-            this.SetCapability(Key, (Object)value);
-        }
-        /// <summary>
-        /// Some of the capabilities must be of explicit base type.
-        /// Create a capability based on int value type
-        /// </summary>
-        /// <param name="Key">Capability name</param>
-        /// <param name="value">Int value</param>
-        public void SetIntCapability(String Key, int value)
-        {
-            this.SetCapability(Key, (Object) value);
-        }
-        /// <summary>
         /// Set Capability which is used to create a new remote Driver.
         /// Has to be defined prior to the NewRemoteWebDriverBackedSelenium method call
         /// To reset desired capabilities - start new table
@@ -143,6 +123,7 @@ namespace Selenium.Isotope
             SetCapability(CapabilityType.BrowserName, caps.GetCapability(CapabilityType.BrowserName));
             SetCapability(CapabilityType.Version, caps.GetCapability(CapabilityType.Version));
             SetCapability(CapabilityType.Platform, caps.GetCapability(CapabilityType.Platform));
+            SetCapability(CapabilityType.IsJavaScriptEnabled, caps.GetCapability(CapabilityType.IsJavaScriptEnabled));
             ISelenium selenium = NewRemoteWebDriverBackedSelenium(hubURI);
             return selenium;
         }
