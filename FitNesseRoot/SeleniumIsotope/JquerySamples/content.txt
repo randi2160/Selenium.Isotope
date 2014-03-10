@@ -1,0 +1,5 @@
+!define WEBSERVER [http://jquery.com]
+!define HOMEURL (/)
+
+!1 Samples of using jQuery
+!contents -R2 -g -p -f -h

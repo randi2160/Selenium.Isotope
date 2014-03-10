@@ -1,0 +1,41 @@
+!define SELECTOR [!-function(locator, inDocument, inWindow) {
+    var loc = locator.replace(/&gt;/g, '>');
+    loc = loc.replace(/&lt;/g, '<');
+    var element;
+    try {
+        element = $(inDocument).find(loc);
+    } catch (e) {
+        return null;
+    }
+    if (element.length == 1 ) {
+        return element[0];
+    } else if(element.length > 1) {
+        return element.get();
+    } else {
+        return null;
+    }
+}-!]
+
+!define SELECTOR [!-var loc = locator.replace(/&gt;/g, '>');
+    loc = loc.replace(/&lt;/g, '<');
+    var element;
+    try {
+        element = $(inDocument).find(loc);
+    } catch (e) {
+        return null;
+    }
+    if (element.length == 1 ) {
+        return element[0];
+    } else if(element.length > 1) {
+        return element.get();
+    } else {
+        return null;
+    }-!]
+!|FitLibrarySeleniumSUT                                          |
+|set system under test|<<SUT                                     |
+|open                 |${WEBSERVER}                              |
+|Add Location Strategy|jquery       |         |${SELECTOR}       |
+|click                |jquery=li.menu-item>a:contains('Download')|
+|Wait for page to load|5000                                      |
+|check                |get Location |http://jquery.com/download/ |
+
