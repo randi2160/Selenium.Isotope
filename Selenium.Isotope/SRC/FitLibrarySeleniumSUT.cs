@@ -64,6 +64,19 @@ namespace Selenium.Isotope
         /// <param name="value">a string for new capability value</param>
         public void SetCapability(String Key, Object value)
         {
+            String v = value.ToString();
+            if (v.ToLower().Trim() == "true")
+            {
+                value = true;
+            }
+            if (v.ToLower().Trim() == "false")
+            {
+                value = false;
+            }
+            if (String.IsNullOrEmpty(v))
+            {
+                value = String.Empty;
+            }
             this.capabilities[Key] = value;
             this.desiredCaps = new DesiredCapabilities(this.capabilities);
         }
@@ -116,14 +129,20 @@ namespace Selenium.Isotope
         /// <param name="capabilitiesMethod">FireFox, InternetExplorer, PhantomJS, HtmlUnit, HtmlUnitWithJavaScript, IPhone, IPad, Chrome, Android, Opera, Safari</param>
         public ISelenium NewRemoteWebDriverBackedSelenium(String hubURI, String capabilitiesMethod)
         {
-            DesiredCapabilities caps = new DesiredCapabilities(capabilities);
+            DesiredCapabilities caps = new DesiredCapabilities(this.capabilities);
             Type type = typeof(DesiredCapabilities);
             MethodInfo standardCapabilities = type.GetMethod(capabilitiesMethod, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase);
             caps = (DesiredCapabilities)standardCapabilities.Invoke(caps, null);
-            SetCapability(CapabilityType.BrowserName, caps.GetCapability(CapabilityType.BrowserName));
-            SetCapability(CapabilityType.Version, caps.GetCapability(CapabilityType.Version));
-            SetCapability(CapabilityType.Platform, caps.GetCapability(CapabilityType.Platform));
-            SetCapability(CapabilityType.IsJavaScriptEnabled, caps.GetCapability(CapabilityType.IsJavaScriptEnabled));
+            type = typeof(CapabilityType);
+            foreach (var p in type.GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public))
+            {
+                String v = (String) p.GetValue(null); // static classes cannot be instanced, so use null...
+                Object o = caps.GetCapability(v);
+                if (o != null)
+                {
+                    SetCapability(v, o);
+                }
+            } 
             ISelenium selenium = NewRemoteWebDriverBackedSelenium(hubURI);
             return selenium;
         }
@@ -157,15 +176,6 @@ namespace Selenium.Isotope
         public string echo(string input)
         {
             return input;
-        }
-        /// <summary>
-        /// wraps echo to store strings into fitnesse symbols
-        /// </summary>
-        /// <param name="input">a string</param>
-        /// <returns>Input String as is. Use symbol recall characters to store output into a symbol.</returns>
-        public string store(string input)
-        {
-            return echo(input);
         }
         #endregion
         #region WaitFor... methods
@@ -359,7 +369,7 @@ namespace Selenium.Isotope
         /// <param name="cLocator">Selenium element locator</param>
         /// <param name="value">Expected count value</param>
         /// <returns>True if event happened within expeted timeout.</returns>
-        public Boolean WaitForXpathCount(String cLocator, String value, String cTimeout)
+        public Boolean WaitForXpathCount(String cLocator, Decimal value, String cTimeout)
         {
             bool bResult = false;
             SeleniumWait<ISelenium> wait = prepareNewWait(cTimeout);
@@ -372,7 +382,7 @@ namespace Selenium.Isotope
         /// <param name="cLocator">attributeLocator - an element locator followed by an @ sign and then the name of the attribute, e.g. "foo@bar"</param>
         /// <param name="value">Expected value</param>
         /// <returns>True if event happened within expeted timeout.</returns>        
-        public bool WaitForXpathCount(string cLocator, String value)
+        public bool WaitForXpathCount(string cLocator, Decimal value)
         {
             bool bResult = WaitForXpathCount(cLocator, value, cMaxTimeOut);
             return bResult;
