@@ -1,0 +1,10 @@
+You can run jQuery by either using runScript or getEval method;
+Run Script doesn't return value (async?);
+getEval returns value (sync?);
+
+!|FitLibrarySeleniumSUT                                                                    |
+|set system under test|<<SUT                                                               |
+|open                 |${WEBSERVER}                                                        |
+|run Script           |$( "a:contains('Download')" ).css( "text-decoration", "underline" );|
+|pause                |3000                                                                |
+
