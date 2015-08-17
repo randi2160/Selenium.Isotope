@@ -379,12 +379,33 @@ namespace Selenium.Isotope
         /// <summary>
         /// Overload of WaitForXpathCount. Uses default timeout. 
         /// </summary>
-        /// <param name="cLocator">attributeLocator - an element locator followed by an @ sign and then the name of the attribute, e.g. "foo@bar"</param>
+        /// <param name="cLocator">xPath expression. Count added automatically</param>
         /// <param name="value">Expected value</param>
         /// <returns>True if event happened within expeted timeout.</returns>        
         public bool WaitForXpathCount(string cLocator, Decimal value)
         {
             bool bResult = WaitForXpathCount(cLocator, value, cMaxTimeOut);
+            return bResult;
+        }
+        /// <summary>
+        /// Wait for JavaScript condition to become true. Does not not throw timeout exception. 
+        /// </summary>
+        /// <param name="cJSExpression">Javascript expression which should result in booleam true|false for example For example 'complete' == document.readyState</param>
+        /// <param name="cTimeout">Expected timeout in millliseconds</param>
+        /// <returns>True if event happened within expeted timeout.</returns>
+        public Boolean WaitForCondition(String cJSExpression, String cTimeout)
+        {
+            bool bResult = false;
+            SeleniumWait<ISelenium> wait = prepareNewWait(cTimeout);
+            bResult = wait.Until(sel => (bool.Parse(sel.GetEval(cJSExpression))==true));
+            return bResult;
+        }
+        /// <summary>
+        /// Overload of WaitForCondition. Uses default timeout.
+        /// </summary>
+        public bool WaitForCondition(string cLocator)
+        {
+            bool bResult = WaitForCondition(cLocator, cMaxTimeOut);
             return bResult;
         }
         #endregion
