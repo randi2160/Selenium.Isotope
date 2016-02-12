@@ -23,6 +23,18 @@ namespace Selenium.Isotope
         ISelenium SystemUnderTest { get { return _seleniumInstance; } }
         #endregion
         #region Private Methods
+        private bool boolHelper(string s) {
+            bool result = false;
+            try
+            {
+                result = bool.Parse(s);
+            }
+            catch
+            {
+                // swallow 
+            }
+            return result;
+        }
         /// <summary>
         /// Helper method. Prepares new SeleniumWait object to be used by WaitFor... functions
         /// </summary>
@@ -397,7 +409,7 @@ namespace Selenium.Isotope
         {
             bool bResult = false;
             SeleniumWait<ISelenium> wait = prepareNewWait(cTimeout);
-            bResult = wait.Until(sel => (bool.Parse(sel.GetEval(cJSExpression))==true));
+            bResult = wait.Until(sel => (boolHelper(sel.GetEval(cJSExpression))==true));
             return bResult;
         }
         /// <summary>
